@@ -111,10 +111,10 @@
                 <br><br>
                 <input type="submit" id="submit" class="common-button" value="Login">
 
-                <div class="Login-form-submit-section">
+                <div class="Login-form-submit-section" style="display:none;">
                     <span>Don't have an account yet? <a href="{{ route('register.form') }}">Create Account</a></span>
+                    Forgot your password? <a href="{{ route('password.request') }}">Reset Password</a>
                 </div>
-                Forgot your password? <a href="{{ route('password.request') }}">Reset Password</a>
             </form>
         </div>
     </div>

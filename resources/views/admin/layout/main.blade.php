@@ -109,23 +109,9 @@
         </li>
 
         <li class="nav-item">
-          <a href="{{url('/admin/faq')}}" class="nav-link {{$activeLink=='faq'?'active':''}}">
-            <i class="nav-icon fas fa-question-circle"></i>
-            <p>Faqs</p>
-          </a>
-        </li>
-
-        <li class="nav-item">
           <a href="{{url('/admin/blogs')}}" class="nav-link {{$activeLink=='blogs'?'active':''}}">
             <i class="nav-icon fas fa-blog"></i>
             <p>Blogs</p>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a href="{{url('/admin/services')}}" class="nav-link {{$activeLink=='services'?'active':''}}">
-            <i class="nav-icon fas fa-concierge-bell"></i>
-            <p>Services</p>
           </a>
         </li>
 
@@ -141,20 +127,6 @@
             <i class="nav-icon fas fa-cogs"></i>
             <p>Settings</p>
           </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="{{ url('/admin/quotes') }}" class="nav-link {{ $activeLink == 'quotes' ? 'active' : '' }}">
-                <i class="nav-icon fas fa-envelope-open-text"></i>
-                <p>Quote Requests</p>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="{{ url('/admin/newsletter-subscribers') }}" class="nav-link {{ $activeLink == 'newsletter' ? 'active' : '' }}">
-                <i class="nav-icon fas fa-newspaper"></i>
-                <p>Newsletter Subscribers</p>
-            </a>
         </li>
 
 

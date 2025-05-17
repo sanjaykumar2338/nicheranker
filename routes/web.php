@@ -148,19 +148,10 @@ Route::post('/subscribe-newsletter', [App\Http\Controllers\HomeController::class
 
 Route::get('/get-quote', [App\Http\Controllers\QuoteController::class, 'showForm'])->name('quote.form');
 Route::post('/get-quote', [App\Http\Controllers\QuoteController::class, 'store'])->name('quote.store');
-
-Route::post('/save_review', [App\Http\Controllers\HomeController::class, 'save_review'])->name('save_review');
-Route::get('/get_images', [App\Http\Controllers\HomeController::class, 'get_images'])->name('get_images');
-Route::get('/updateImageNames', [App\Http\Controllers\HomeController::class, 'updateImageNames'])->name('updateImageNames');
-Route::get('/updateEmptyImageColumns', [App\Http\Controllers\HomeController::class, 'updateEmptyImageColumns'])->name('updateEmptyImageColumns');
 Route::post('/contact/save', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact.save');
 
-Route::get('/pricing', [App\Http\Controllers\HomeController::class, 'pricing'])->name('pricing');
 Route::get('/contactus', [App\Http\Controllers\HomeController::class, 'contactus'])->name('contactus');
 Route::get('/aboutus', [App\Http\Controllers\HomeController::class, 'aboutus'])->name('aboutus');
-Route::get('/track', [App\Http\Controllers\HomeController::class, 'track'])->middleware('check.auth')->name('track');
-Route::get('/get_stores', [App\Http\Controllers\HomeController::class, 'get_stores'])->middleware('check.auth')->name('get_stores');
-//Route::get('/track/add', [App\Http\Controllers\TrackController::class, 'add'])->middleware('check.track.limit')->name('track.add');
 
 Route::get('/faq', [App\Http\Controllers\HomeController::class, 'faq'])->name('faq');
 Route::get('/terms-and-conditions', [App\Http\Controllers\HomeController::class, 'terms'])->name('terms');
@@ -172,44 +163,23 @@ Route::get('/register', [App\Http\Controllers\HomeController::class, 'register']
 Route::post('/register', [App\Http\Controllers\UserController::class, 'register'])->name('register');
 Route::get('/logout', [App\Http\Controllers\UserController::class, 'logout'])->name('logout');
 Route::post('/login', [App\Http\Controllers\UserController::class, 'login'])->name('login');
-Route::post(
-    'stripe/webhook',
-    [WebhookController::class, 'handleWebhook']
-);
-
-Route::post('/charge', [App\Http\Controllers\PaymentController::class, 'processPayment'])->name('charge');
-Route::post('/check_coupon', [App\Http\Controllers\PaymentController::class, 'check_coupon'])->name('check_coupon');
-
-Route::get('/linkstorage', function () {
-    Artisan::call('storage:link');
-});
-
-Route::get('plans', [SubscriptionController::class, 'index'])->middleware('auth')->name('plans');
-Route::get('/plan/{id}', [App\Http\Controllers\HomeController::class, 'plandetails'])->middleware('auth')->name('plan.detail');
-Route::get('/check_store/{id}', [App\Http\Controllers\TrackController::class, 'check_store'])->middleware('auth')->name('check_store');
-
-Route::get('/subscribe', 'SubscriptionController@showSubscription');
-Route::post('/subscribe', [PaymentController::class, 'store'])->name('subscribe.form');
-Route::get('/subscription-cancel', [PaymentController::class, 'subscriptionCancel'])->name('subscription-cancel');
-
-// welcome page only for subscribed users
-Route::get('/welcome', 'SubscriptionController@showWelcome')->middleware('subscribed');
-Route::group(['middleware' => ['role:seller']], function () {
-  Route::get('/welcome', 'SubscriptionController@showWelcome');
-});
-
-Route::post('/stripe/webhook', [StripeWebhookController::class, 'handleWebhook'])->name('cashier.webhook');
-Route::any('/email-send', [TrackController::class, 'sendEmailToUsersWithTracks']);
-Route::any('/sms-send', [TrackController::class, 'sendSMSToUsers']);
-Route::any('/get-store-price', [TrackController::class, 'getallstore']);
-Route::any('/get-store-name', [TrackController::class, 'getstorewithname']);
 
 Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-//Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::post('password/email', [CustomForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-//for webhook sms api
-Route::get('/webhook1', [App\Http\Controllers\HomeController::class, 'webhook']);
-Route::get('/webhook2', [App\Http\Controllers\HomeController::class, 'webhook']);
+
+Route::get('/homepage', function () {
+    return view('frontend.pages.homepage.index');
+});
+
+Route::get('/', fn() => view('frontend.pages.homepage.index'));
+Route::get('/homepage', fn() => view('frontend.pages.homepage.index'))->name('homepage');
+Route::view('/frameone', 'frontend.pages.homepage.frameone');
+Route::view('/frametwo', 'frontend.pages.homepage.frametwo');
+Route::view('/framethree', 'frontend.pages.homepage.framethree');
+Route::view('/framefour', 'frontend.pages.homepage.framefour');
+Route::view('/framefive', 'frontend.pages.homepage.framefive');
+Route::view('/footerframe', 'frontend.pages.homepage.footer');
+
